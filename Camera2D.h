@@ -1,6 +1,6 @@
 #pragma once
-#include <glm\glm.hpp>
-#include <glm\gtc\matrix_transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 class Camera2D
 {
@@ -17,16 +17,19 @@ public:
 	void update();
 	void init(int screenWidth, int screenHeight);
 
-	void setPosition(const glm::vec2& newPosition) {
+	void setPosition(const glm::vec2 &newPosition)
+	{
 		position = newPosition;
 		needsUpdateMatrix = true;
 	}
-	void setScale(float newScale) {
+	void setScale(float newScale)
+	{
 		scale = newScale;
 		needsUpdateMatrix = true;
 	}
 
-	glm::mat4 getCameraMatrix() {
+	glm::mat4 getCameraMatrix()
+	{
 		return cameraMatrix;
 	}
 

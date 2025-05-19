@@ -1,7 +1,5 @@
 #include "MainGame.h"
 
-
-
 MainGame::MainGame()
 {
 }
@@ -17,22 +15,31 @@ void MainGame::run()
 	gameState = GameState::PLAY;
 	init();
 	sprites.push_back(new Sprite());
-	sprites.back()->init(-1, -1, 1, 1, "Images/lock.png");
+	sprites.back()->init(-1, -1, 1, 1, "Images/Cat cat.png");
 	sprites.push_back(new Sprite());
-	sprites.back()->init(0, -1, 1, 1, "Images/lock.png");
-	//sprite.init(-1, -1, 1, 1,"Images/lock.png");
+	sprites.back()->init(0, -1, 1, 1, "Images/Dabloons.png");
+	// Dos horas de trabajo para colocar estas 2 lineas, y ahora tengo que subirlo a Git, con una rama nueva?
+	// Demasiado dificil la PC profesor.
+	// Le hice algunas modificaciones al fragment shader para que sean ondulaciones
+	// con coordenadas polares para que empiecen desde el centro.
+	// Sigo algo ardido que GodotGOD no haya ganado, F.
+	sprites.push_back(new Sprite());
+	sprites.back()->init(0, 0, 1, 1, "Images/Cat.png");
+	sprites.push_back(new Sprite());
+	sprites.back()->init(-1, 0, 1, 1, "Images/Dabloons.png"); // Para mostrar el cache
+	// Me pase las 2 horas buscando imagenes
 	update();
 }
 
 void MainGame::init()
 {
-	SDL_Init(SDL_INIT_HAPTIC | SDL_INIT_CAMERA | SDL_INIT_EVENTS);
+	SDL_Init(SDL_INIT_HAPTIC | SDL_INIT_EVENTS);
 	window = SDL_CreateWindow("Hola", witdh, height, SDL_WINDOW_OPENGL);
 
 	SDL_GLContext glContext = SDL_GL_CreateContext(window);
 	GLenum error = glewInit();
-	if (error != GLEW_OK) {
-	
+	if (error != GLEW_OK)
+	{
 	}
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	glClearColor(0.0f, 0.4f, 1.0f, 1.0f);
@@ -42,7 +49,8 @@ void MainGame::init()
 void MainGame::processInput()
 {
 	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
+	while (SDL_PollEvent(&event))
+	{
 		switch (event.type)
 		{
 		case SDL_EVENT_QUIT:
@@ -50,8 +58,8 @@ void MainGame::processInput()
 			break;
 		case SDL_EVENT_MOUSE_MOTION:
 			inputManager.setMouseCoords(event.motion.x, event.motion.y);
-			//cout << "posicion x " << event.motion.x << " posicion y " 
-				//			<< event.motion.y << endl;
+			// cout << "posicion x " << event.motion.x << " posicion y "
+			//			<< event.motion.y << endl;
 			break;
 		case SDL_EVENT_KEY_DOWN:
 			inputManager.pressKey(event.key.key);
@@ -74,7 +82,8 @@ void MainGame::initShaders()
 
 void MainGame::update()
 {
-	while (gameState != GameState::EXIT) {
+	while (gameState != GameState::EXIT)
+	{
 		processInput();
 		draw();
 	}

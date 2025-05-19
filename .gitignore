@@ -17,6 +17,8 @@ x64/Release*/
 build*/
 out*/
 
+juego
+
 # Archivos objeto, ejecutables y bibliotecas
 *.obj
 *.o
